@@ -23,7 +23,7 @@ namespace PethanyApplication.Controllers
         public IActionResult List()
         {
             PiesListViewModel piesListViewModel = new PiesListViewModel();
-            piesListViewModel.Pies = _pieRepository.AllPies;
+            piesListViewModel.Pies = _pieRepository.AllPies();
 
             piesListViewModel.CurrentCategory = "Cheese cakes";
             return View(piesListViewModel);

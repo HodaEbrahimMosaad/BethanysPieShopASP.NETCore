@@ -29,7 +29,7 @@ namespace PethanyApplication
             services.AddControllersWithViews();
 
             services.AddScoped<ICategoryRepository, MockCategoryRepository>();
-            services.AddScoped<IPieRepository, MockPieRepository>();
+            services.AddScoped<IPieRepository, PieRepository>();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
