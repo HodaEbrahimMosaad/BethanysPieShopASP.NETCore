@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PethanyApplication.Models;
 
-namespace BethanysPieShop.ViewModels
+namespace PethanyApplication.ViewModels
 {
     public class PiesListViewModel
     {

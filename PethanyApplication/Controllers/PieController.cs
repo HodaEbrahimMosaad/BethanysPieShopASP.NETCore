@@ -1,6 +1,6 @@
-﻿using BethanysPieShop.ViewModels;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PethanyApplication.Models;
+using PethanyApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace PethanyApplication.Controllers
         }
 
 
-        public ViewResult Index()
+        public IActionResult List()
         {
             PiesListViewModel piesListViewModel = new PiesListViewModel();
             piesListViewModel.Pies = _pieRepository.AllPies;
