@@ -27,3 +27,7 @@ namespace PethanyApplication.Controllers
         }
     }
 }
+
+//session id -- by default - session can be accessed by http
+
+//cookie

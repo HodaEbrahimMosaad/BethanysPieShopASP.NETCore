@@ -33,6 +33,13 @@ namespace PethanyApplication
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+
+            services.AddHttpContextAccessor();
+            services.AddSession();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +52,8 @@ namespace PethanyApplication
             //app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
