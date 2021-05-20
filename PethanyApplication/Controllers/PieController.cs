@@ -19,11 +19,15 @@ namespace PethanyApplication.Controllers
             _categoryRepository = categoryRepository;
         }
 
-
-        public IActionResult List()
+        public IActionResult List(string category)
         {
             PiesListViewModel piesListViewModel = new PiesListViewModel();
             piesListViewModel.Pies = _pieRepository.AllPies();
+
+            if (category != null)
+            {
+                piesListViewModel.Pies = piesListViewModel.Pies.Where(p => p.Category.CategoryName == category);
+            }
 
             piesListViewModel.CurrentCategory = "Cheese cakes";
             return View(piesListViewModel);
