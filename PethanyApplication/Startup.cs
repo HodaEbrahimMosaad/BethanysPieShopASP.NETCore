@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,14 +31,29 @@ namespace PethanyApplication
 
             services.AddScoped<ICategoryRepository, MockCategoryRepository>();
             services.AddScoped<IPieRepository, PieRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
 
+
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<AppDbContext>();
+
+
+
             services.AddHttpContextAccessor();
             services.AddSession();
+            services.AddRazorPages();
+
 
 
         }
@@ -55,12 +71,15 @@ namespace PethanyApplication
             app.UseSession();
 
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }
